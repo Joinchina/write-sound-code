@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script>
+        //es5
+        let obj={
+            name:'xxx',
+            age:26
+        }
+        let vm={}
+        // Object.defineProperty(vm,'name',{
+        //     configurable:true,
+        //     enumerable:true,
+        //     get:()=>{
+        //         console.log('get---',obj[name])
+        //         return obj[name]
+        //     },
+        //     set:(newValue)=>{
+        //         console.log('set---',newValue)
+        //         if(obj[name]===newValue){
+        //             return obj[name]
+        //         }
+        //         obj[name]=newValue 
+        //         document.getElementById('app').innerText=newValue
+        //     }
+        // })
+        // //多个属性的时候
+        // Object.keys(obj).forEach(key=>{
+        //     Object.defineProperty(vm,key,{
+        //         configurable:true,
+        //         enumerable:true,
+        //         get:()=>{
+        //             console.log('get---',obj[key])
+        //             return obj[key]
+        //         },
+        //         set:(newValue)=>{
+        //             console.log('set---',newValue)
+        //             if(obj[key]===newValue){
+        //                 return obj[key]
+        //             }
+        //             document.getElementById('app').innerText=newValue
+        //         }
+        //     })
+        // })
+        // es6
+
+        let P = new Proxy(obj,{
+            get(target,key){
+                console.log('get---',target,key)
+                return target[key]
+            },
+            set(target,key,newValue){
+                if(target[key]===newValue){
+                    return newValue
+                }
+                target[key]===newValue
+                document.getElementById('app').innerText=newValue
+            }
+        })
+        P.name="xxx"
+    </script>
+</body>
+</html>
